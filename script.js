@@ -233,3 +233,35 @@ updateCartCount();
 displayCart();
 
 displayCheckoutTotal();
+// =========================
+// PLACE ORDER
+// =========================
+
+const checkoutForm = document.getElementById("checkout-form");
+
+if (checkoutForm) {
+
+    checkoutForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        if (cart.length === 0) {
+
+            alert("Your cart is empty!");
+
+            return;
+        }
+
+        alert("🎉 Order placed successfully! Thank you for shopping with StyleHub.");
+
+        // Clear cart
+        localStorage.removeItem("cart");
+
+        cart = [];
+
+        // Go to home page
+        window.location.href = "index.html";
+
+    });
+
+}
