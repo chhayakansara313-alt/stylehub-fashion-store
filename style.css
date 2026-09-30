@@ -295,3 +295,101 @@ footer {
     min-width: 20px;
     text-align: center;
 }
+/* =========================
+   CHECKOUT PAGE
+   ========================= */
+
+.checkout-section {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-section h1 {
+    text-align: center;
+
+    color: #d63384;
+
+    margin-bottom: 30px;
+}
+
+.checkout-section label {
+    display: block;
+
+    margin-top: 15px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+.checkout-section input,
+.checkout-section textarea,
+.checkout-section select {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+}
+
+.checkout-section textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.checkout-section input:focus,
+.checkout-section textarea:focus,
+.checkout-section select:focus {
+
+    outline: none;
+
+    border-color: #d63384;
+}
+
+.checkout-section h2 {
+
+    margin-top: 25px;
+
+    color: #333;
+}
+
+.checkout-section button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #d63384;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 25px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.checkout-section button:hover {
+
+    background: #b52b70;
+}
