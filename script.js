@@ -265,3 +265,12 @@ if (checkoutForm) {
     });
 
 }
+function showCategory(category) {
+
+    alert("You selected " + category + " category! 🛍️");
+
+    document.querySelector(".products").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
