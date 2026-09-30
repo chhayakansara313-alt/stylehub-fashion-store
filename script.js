@@ -47,26 +47,39 @@ function updateCartCount() {
 
 function displayCart() {
 
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
+    cartItems.innerHTML += `
 
-    if (!cartItems) {
-        return;
-    }
+    <div class="cart-item">
 
-    cartItems.innerHTML = "";
+        <div>
+            <h3>${product.name}</h3>
 
-    let total = 0;
+            <p>Price: ₹${product.price}</p>
 
-    if (cart.length === 0) {
+            <div class="quantity-control">
 
-        cartItems.innerHTML = "<h3>Your cart is empty 🛒</h3>";
+                <button onclick="changeQuantity(${index}, -1)">−</button>
 
-        cartTotal.textContent = "0";
+                <span>${product.quantity}</span>
 
-        return;
-    }
+                <button onclick="changeQuantity(${index}, 1)">+</button>
 
+            </div>
+        </div>
+
+        <div>
+
+            <strong>₹${itemTotal}</strong>
+
+            <button onclick="removeFromCart(${index})">
+                Remove
+            </button>
+
+        </div>
+
+    </div>
+
+`;
 
     cart.forEach((product, index) => {
 
@@ -118,19 +131,19 @@ function removeFromCart(index) {
 }
 
 
-function checkout() {
+function changeQuantity(index, change) {
 
-    if (cart.length === 0) {
+    cart[index].quantity += change;
 
-        alert("Your cart is empty!");
-
-        return;
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
     }
 
-    alert("Thank you for shopping with StyleHub! 🎉");
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    displayCart();
+
+    updateCartCount();
 }
-
-
-updateCartCount();
 
 displayCart();
