@@ -1,6 +1,10 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
+// =========================
+// ADD TO CART
+// =========================
+
 function addToCart(name, price) {
 
     const existingProduct = cart.find(product => product.name === name);
@@ -27,6 +31,10 @@ function addToCart(name, price) {
 }
 
 
+// =========================
+// UPDATE CART COUNT
+// =========================
+
 function updateCartCount() {
 
     const cartCountElement = document.getElementById("cart-count");
@@ -45,42 +53,37 @@ function updateCartCount() {
 }
 
 
+// =========================
+// DISPLAY CART
+// =========================
+
 function displayCart() {
 
-    cartItems.innerHTML += `
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
 
-    <div class="cart-item">
+    if (!cartItems) {
+        return;
+    }
 
-        <div>
-            <h3>${product.name}</h3>
+    cartItems.innerHTML = "";
 
-            <p>Price: ₹${product.price}</p>
+    let total = 0;
 
-            <div class="quantity-control">
+    // Empty cart
+    if (cart.length === 0) {
 
-                <button onclick="changeQuantity(${index}, -1)">−</button>
+        cartItems.innerHTML = "<h3>Your cart is empty 🛒</h3>";
 
-                <span>${product.quantity}</span>
+        if (cartTotal) {
+            cartTotal.textContent = "0";
+        }
 
-                <button onclick="changeQuantity(${index}, 1)">+</button>
+        return;
+    }
 
-            </div>
-        </div>
 
-        <div>
-
-            <strong>₹${itemTotal}</strong>
-
-            <button onclick="removeFromCart(${index})">
-                Remove
-            </button>
-
-        </div>
-
-    </div>
-
-`;
-
+    // Display products
     cart.forEach((product, index) => {
 
         const itemTotal = product.price * product.quantity;
@@ -92,12 +95,27 @@ function displayCart() {
             <div class="cart-item">
 
                 <div>
+
                     <h3>${product.name}</h3>
 
                     <p>Price: ₹${product.price}</p>
 
-                    <p>Quantity: ${product.quantity}</p>
+                    <div class="quantity-control">
+
+                        <button onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>${product.quantity}</span>
+
+                        <button onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
                 </div>
+
 
                 <div>
 
@@ -115,9 +133,16 @@ function displayCart() {
     });
 
 
-    cartTotal.textContent = total;
+    // Display total
+    if (cartTotal) {
+        cartTotal.textContent = total;
+    }
 }
 
+
+// =========================
+// REMOVE FROM CART
+// =========================
 
 function removeFromCart(index) {
 
@@ -128,15 +153,24 @@ function removeFromCart(index) {
     displayCart();
 
     updateCartCount();
+
+    displayCheckoutTotal();
 }
 
+
+// =========================
+// CHANGE QUANTITY
+// =========================
 
 function changeQuantity(index, change) {
 
     cart[index].quantity += change;
 
+    // Remove product if quantity becomes 0
     if (cart[index].quantity <= 0) {
+
         cart.splice(index, 1);
+
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -144,9 +178,15 @@ function changeQuantity(index, change) {
     displayCart();
 
     updateCartCount();
+
+    displayCheckoutTotal();
 }
 
-displayCart();
+
+// =========================
+// GO TO CHECKOUT
+// =========================
+
 function goToCheckout() {
 
     if (cart.length === 0) {
@@ -158,3 +198,38 @@ function goToCheckout() {
 
     window.location.href = "checkout.html";
 }
+
+
+// =========================
+// DISPLAY CHECKOUT TOTAL
+// =========================
+
+function displayCheckoutTotal() {
+
+    const checkoutTotal = document.getElementById("checkout-total");
+
+    if (!checkoutTotal) {
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach(product => {
+
+        total += product.price * product.quantity;
+
+    });
+
+    checkoutTotal.textContent = total;
+}
+
+
+// =========================
+// START FUNCTIONS
+// =========================
+
+updateCartCount();
+
+displayCart();
+
+displayCheckoutTotal();
