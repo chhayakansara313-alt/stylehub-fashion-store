@@ -399,3 +399,30 @@ nav a:hover {
 
     background: #b52b70;
 }
+/* Product Search Bar */
+
+.search-container {
+    margin: 25px auto 35px;
+    max-width: 500px;
+    padding: 0 15px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #f3b5d0;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
+}
+
+#searchInput::placeholder {
+    color: #999;
+}
