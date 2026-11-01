@@ -69,10 +69,19 @@
     <!-- Trending Products -->
     <section class="products">
 
-        <h2>Trending Products</h2>
+    <h2>Trending Products</h2>
 
-        <div class="product-container">
+    <!-- Product Search -->
+    <div class="search-container">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for dresses, kurtis, shoes..."
+            onkeyup="searchProducts()"
+        >
+    </div>
 
+    <div class="product-container">
             <div class="product">
                 <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8"
                     alt="Trendy Dress">
