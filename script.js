@@ -272,6 +272,7 @@ let selectedCategory = "all";
 function showCategory(category) {
 
     selectedCategory = category.toLowerCase();
+    alert("Selected category: " + selectedCategory);
 
     const searchInput = document.getElementById("searchInput");
 
