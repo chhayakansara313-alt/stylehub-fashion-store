@@ -296,26 +296,29 @@ function updateProducts() {
 
     const searchInput = document.getElementById("searchInput");
 
-    const searchText = searchInput.value.toLowerCase();
+    const searchText = searchInput
+        ? searchInput.value.toLowerCase().trim()
+        : "";
 
     const products = document.querySelectorAll(".product");
 
     products.forEach(product => {
 
-        const productName = product.querySelector("h3").textContent.toLowerCase();
+        const productName = product.querySelector("h3")
+            .textContent.toLowerCase();
 
-        const productCategory = product.dataset.category;
+        const productCategory = product.getAttribute("data-category");
 
-        const matchesCategory = selectedCategory === "all" ||
+        const matchesCategory =
+            selectedCategory === "all" ||
             productCategory === selectedCategory;
 
-        const matchesSearch = productName.includes(searchText);
+        const matchesSearch =
+            productName.includes(searchText);
 
-        if (matchesCategory && matchesSearch) {
-            product.style.display = "block";
-        } else {
-            product.style.display = "none";
-        }
+        product.style.display =
+            matchesCategory && matchesSearch ? "" : "none";
 
     });
+
 }
