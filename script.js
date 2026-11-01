@@ -265,22 +265,38 @@ if (checkoutForm) {
     });
 
 }
+// CATEGORY FILTER + SEARCH
+
+let selectedCategory = "all";
+
 function showCategory(category) {
 
-    alert("You selected " + category + " category! 🛍️");
+    selectedCategory = category.toLowerCase();
+
+    const searchInput = document.getElementById("searchInput");
+
+    if (searchInput) {
+        searchInput.value = "";
+    }
+
+    updateProducts();
 
     document.querySelector(".products").scrollIntoView({
         behavior: "smooth"
     });
-
 }
-// =========================
-// SEARCH PRODUCTS
-// =========================
+
 
 function searchProducts() {
+    updateProducts();
+}
 
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+
+function updateProducts() {
+
+    const searchInput = document.getElementById("searchInput");
+
+    const searchText = searchInput.value.toLowerCase();
 
     const products = document.querySelectorAll(".product");
 
@@ -288,16 +304,18 @@ function searchProducts() {
 
         const productName = product.querySelector("h3").textContent.toLowerCase();
 
-        if (productName.includes(searchInput)) {
+        const productCategory = product.dataset.category;
 
+        const matchesCategory = selectedCategory === "all" ||
+            productCategory === selectedCategory;
+
+        const matchesSearch = productName.includes(searchText);
+
+        if (matchesCategory && matchesSearch) {
             product.style.display = "block";
-
         } else {
-
             product.style.display = "none";
-
         }
 
     });
-
 }
